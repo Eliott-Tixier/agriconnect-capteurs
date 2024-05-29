@@ -8,8 +8,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/agriconect-capteurs?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/agriconnect-capteurs?serverTimezone=UTC
     username: root
     password: root
 
