@@ -57,6 +57,11 @@ public class CapteurController {
         return capteurService.changerAllIntervalles(intervalle);
     }
 
+    @PutMapping("/{id}/intervalle/{tempsi}")
+    public Capteur updateCapteurInterval(@PathVariable Long id, @PathVariable int tempsi) throws CapteurNotFoundException {
+        return capteurService.updateCapteurInterval(id, tempsi);
+    }
+
     @ExceptionHandler(CapteurNotFoundException.class)
     public ResponseEntity<String> handleCapteurNotFoudException(CapteurNotFoundException e){
         return new ResponseEntity<>("Capteur non trouvé "+ e.getMessage(), HttpStatus.NOT_FOUND);

@@ -10,10 +10,12 @@ import java.util.List;
 @Service
 public class CapteurService {
 
-    private CapteurRepository capteurRepository;
+    private final CapteurRepository capteurRepository;
+    private final SchedulerServiceClient schedulerServiceClient;
 
-    public CapteurService(CapteurRepository capteurRepository) {
+    public CapteurService(CapteurRepository capteurRepository, SchedulerServiceClient schedulerServiceClient) {
         this.capteurRepository = capteurRepository;
+        this.schedulerServiceClient = schedulerServiceClient;
     }
 
     public Capteur save(Capteur capteur){
@@ -42,10 +44,6 @@ public class CapteurService {
         return capteurRepository.findAll();
     }
 
-    public List<Capteur> getAll(){
-        return capteurRepository.findAll();
-    }
-
     public double getTemperture(long idCapteur) throws CapteurNotFoundException {
         try {
             return capteurRepository.findById(idCapteur).get().getTemperature();
@@ -70,4 +68,12 @@ public class CapteurService {
         return capteurRepository.saveAllAndFlush(capteurList);
     }
 
+    public Capteur updateCapteurInterval(Long id, int interval) throws CapteurNotFoundException {
+        Capteur capteur = capteurRepository.findById(id)
+                .orElseThrow(CapteurNotFoundException::new);
+        capteur.setIntervalle(interval);
+        Capteur updatedCapteur = capteurRepository.save(capteur);
+        schedulerServiceClient.scheduleSensorDataCollection(updatedCapteur.getId());
+        return updatedCapteur;
+    }
 }
