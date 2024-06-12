@@ -66,4 +66,9 @@ public class CapteurController {
     public ResponseEntity<String> handleCapteurNotFoudException(CapteurNotFoundException e){
         return new ResponseEntity<>("Capteur non trouvé "+ e.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/idUtilisateur/{id}")
+    public List<Capteur> getCapteurByIdUtilisateur(@PathVariable Long id) throws CapteurNotFoundException {
+        return capteurService.findCapteurByIdUtilisateur(id);
+    }
 }
