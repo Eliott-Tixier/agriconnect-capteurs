@@ -76,4 +76,9 @@ public class CapteurService {
         schedulerServiceClient.scheduleSensorDataCollection(updatedCapteur.getId());
         return updatedCapteur;
     }
+
+    public List<Capteur> findCapteurByIdUtilisateur(Long idUtilisateur) throws CapteurNotFoundException {
+        List<Capteur> capteurList= capteurRepository.findCapteurByIdUtilisateur(idUtilisateur);
+        return capteurList;
+    }
 }

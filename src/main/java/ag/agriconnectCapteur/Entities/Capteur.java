@@ -29,4 +29,6 @@ public class Capteur {
 
     private int intervalle;
 
+    private Long idUtilisateur;
+
 }
