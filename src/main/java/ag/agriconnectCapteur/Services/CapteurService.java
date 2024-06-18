@@ -81,4 +81,10 @@ public class CapteurService {
         List<Capteur> capteurList= capteurRepository.findCapteurByIdUtilisateur(idUtilisateur);
         return capteurList;
     }
+
+    public void deleteCapteur(Long id) throws CapteurNotFoundException {
+        Capteur capteur = capteurRepository.findById(id)
+                .orElseThrow(CapteurNotFoundException::new);
+        capteurRepository.delete(capteur);
+    }
 }

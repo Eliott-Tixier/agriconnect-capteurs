@@ -71,4 +71,9 @@ public class CapteurController {
     public List<Capteur> getCapteurByIdUtilisateur(@PathVariable Long id) throws CapteurNotFoundException {
         return capteurService.findCapteurByIdUtilisateur(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) throws CapteurNotFoundException {
+        capteurService.deleteCapteur(id);
+    }
 }
