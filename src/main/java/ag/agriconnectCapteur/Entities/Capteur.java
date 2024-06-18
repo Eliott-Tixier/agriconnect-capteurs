@@ -19,9 +19,9 @@ public class Capteur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private float longitude;
+    private double longitude;
 
-    private float latitude;
+    private double latitude;
 
     private double temperature;
 
